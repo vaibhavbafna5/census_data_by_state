@@ -112,5 +112,5 @@ for state in STATES:
         state_df = pd.concat([state_df, survey_df])
 
     state_df = state_df.reset_index(drop=True)
-    state_df.to_csv(f'{state.name}.csv')
+    state_df.to_csv(f'{state.name}_{YEAR}.csv')
     print(f"finished writing {state} census data to CSV")

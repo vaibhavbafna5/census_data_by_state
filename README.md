@@ -1,7 +1,11 @@
 ## Demographic Census Data by State
 
-Spec can be found [here](https://docs.google.com/document/d/16SBPGHY_kbDQLDR4tlT1_5sBnIhIpfFftw5X8WJhvEE/edit)
+### General
+Spec can be found [here](https://docs.google.com/document/d/16SBPGHY_kbDQLDR4tlT1_5sBnIhIpfFftw5X8WJhvEE/edit).
 
+
+CSV files are saved in the current directory as `[STATE_NAME]_[YEAR].csv`
+Also have attached a Jupyter Notebook to show samples of function output.
 ### Setup
 * initialize virtual environment
 * install dependencies specified in `requirements3.txt` (note: requirements are for Jupyter environment, don't necessarily need all of them)
