@@ -1,3 +1,4 @@
+import sys
 import warnings
 warnings.simplefilter(action='ignore', category=FutureWarning)
 
@@ -15,6 +16,9 @@ pd.set_option('display.max_colwidth', -1)
 
 # TODO: should put this as an env variable 
 API_KEY = 'b3429317418aab0b6f375290db2a3420535d135c'
+
+# TODO: not good to hardcode globals, make it more elegant
+YEAR = '2021'
 
 def generate_survey_codes_for_each_state():
     """
@@ -44,7 +48,7 @@ def get_variable_names_to_labels_mapping(full_variables):
     variables_to_labels = {}
     
     for full_variable in full_variables:
-        variable_table_url = f'https://api.census.gov/data/2017/acs/acs5/variables/{full_variable}.html'
+        variable_table_url = f'https://api.census.gov/data/{YEAR}/acs/acs5/variables/{full_variable}.html'
         v_table = pd.read_html(variable_table_url)
         variable_df = pd.DataFrame(v_table[0])
         variable_df['Label'].replace({"!!": " ", ":": ""}, regex=True, inplace=True)
@@ -63,7 +67,7 @@ def get_data_by_group_and_state(group, state):
     - dict (e.g. B01001A_001E --> 864,675)
     """
 
-    url = f'https://api.census.gov/data/2021/acs/acs1?get=group({group})&for=state:{state}'
+    url = f'https://api.census.gov/data/{YEAR}/acs/acs1?get=group({group})&for=state:{state}'
     r = requests.get(url)
     r_json = r.json()
 
@@ -106,4 +110,7 @@ def main():
         state_df.to_csv(f'{state.name}.csv')
 
 if __name__ == "__main__":
+    if len(sys.argv) > 1:
+        YEAR = YEAR
+        
     main()
