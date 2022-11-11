@@ -84,7 +84,7 @@ if len(sys.argv) > 1:
 print(f"starting census data for {YEAR}")
 survey_codes = generate_survey_codes_for_each_state()
 
-for state in STATES[0:2]:
+for state in STATES:
     print(f"generating csv for {state.name}")
     # intiialize empty dataframe
     state_df = pd.DataFrame(columns=['FULL_VARIABLE', 'CONCEPT', 'VALUE'])
