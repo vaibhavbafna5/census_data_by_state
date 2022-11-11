@@ -81,7 +81,7 @@ if len(sys.argv) > 1:
     # TODO: more rigorous error checking to ensure census year is valid
     YEAR = sys.argv[1]
 
-print(f"starting census data for {YEAR}")
+print(f"gathering census data for {YEAR}")
 survey_codes = generate_survey_codes_for_each_state()
 
 for state in STATES:
