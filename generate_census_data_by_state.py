@@ -48,7 +48,7 @@ def get_variable_names_to_labels_mapping(full_variables):
     variables_to_labels = {}
     
     for full_variable in full_variables:
-        variable_table_url = f'https://api.census.gov/data/{YEAR}/acs/acs5/variables/{full_variable}.html'
+        variable_table_url = f'https://api.census.gov/data/2017/acs/acs5/variables/{full_variable}.html'
         v_table = pd.read_html(variable_table_url)
         variable_df = pd.DataFrame(v_table[0])
         variable_df['Label'].replace({"!!": " ", ":": ""}, regex=True, inplace=True)
@@ -76,41 +76,41 @@ def get_data_by_group_and_state(group, state):
             
     return variables_to_values
 
-def main():
-    survey_codes = generate_survey_codes_for_each_state()
+# check if year was inputted as command line argument
+if len(sys.argv) > 1:
+    # TODO: more rigorous error checking to ensure census year is valid
+    YEAR = sys.argv[1]
 
-    for state in STATES:
-        print(f"generating csv for {state.name}")
-        # intiialize empty dataframe
-        state_df = pd.DataFrame(columns=['FULL_VARIABLE', 'CONCEPT', 'VALUE'])
+print(f"starting census data for {YEAR}")
+survey_codes = generate_survey_codes_for_each_state()
 
-        # get data for each type of survey
-        for group_survey_code in survey_codes:
-            survey_df = pd.DataFrame(columns=['FULL_VARIABLE', 'CONCEPT', 'VALUE'])
+for state in STATES[0:2]:
+    print(f"generating csv for {state.name}")
+    # intiialize empty dataframe
+    state_df = pd.DataFrame(columns=['FULL_VARIABLE', 'CONCEPT', 'VALUE'])
 
-            survey_data = get_data_by_group_and_state(group_survey_code, str(state.fips))
-            survey_variables = list(survey_data.keys())
+    # get data for each type of survey
+    for group_survey_code in survey_codes:
+        survey_df = pd.DataFrame(columns=['FULL_VARIABLE', 'CONCEPT', 'VALUE'])
 
-            survey_variable_names_to_labels = get_variable_names_to_labels_mapping(survey_variables)
+        survey_data = get_data_by_group_and_state(group_survey_code, str(state.fips))
+        survey_variables = list(survey_data.keys())
 
-            # unite full variables, concepts, & numbers into 
-            for variable, value in survey_data.items():
-                concept = survey_variable_names_to_labels[variable]
-                row = {
-                    'FULL_VARIABLE' : variable, 
-                    'CONCEPT' : concept,
-                    'VALUE' : value
-                }
-                survey_df = survey_df.append(row, ignore_index=True)
+        survey_variable_names_to_labels = get_variable_names_to_labels_mapping(survey_variables)
 
-            # append each survey df to the overall state df
-            state_df = pd.concat([state_df, survey_df])
+        # unite full variables, concepts, & numbers into 
+        for variable, value in survey_data.items():
+            concept = survey_variable_names_to_labels[variable]
+            row = {
+                'FULL_VARIABLE' : variable, 
+                'CONCEPT' : concept,
+                'VALUE' : value
+            }
+            survey_df = survey_df.append(row, ignore_index=True)
 
-        state_df = state_df.reset_index(drop=True)
-        state_df.to_csv(f'{state.name}.csv')
+        # append each survey df to the overall state df
+        state_df = pd.concat([state_df, survey_df])
 
-if __name__ == "__main__":
-    if len(sys.argv) > 1:
-        YEAR = YEAR
-        
-    main()
+    state_df = state_df.reset_index(drop=True)
+    state_df.to_csv(f'{state.name}.csv')
+    print(f"finished writing {state} census data to CSV")
