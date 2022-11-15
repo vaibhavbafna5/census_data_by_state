@@ -11,6 +11,6 @@ Also have attached a Jupyter Notebook to show samples of function output.
 * install dependencies specified in `requirements3.txt`
 
 ### Running
-`python generate_census_data_by_state.py` - generates CSVs for 50 states based on 2021 data
+`python generate_census_data_per_state_by_year.py` - generates CSVs for 50 states based on 2021 data
 
-`python generate_census_data_by_state.py [year]` - generates CSVs for 50 states based on data for the specified year
+`python generate_census_data_per_state_by_year.py [year]` - generates CSVs for 50 states based on data for the specified year
