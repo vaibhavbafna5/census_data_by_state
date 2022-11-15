@@ -10,6 +10,6 @@ CSV files are saved in the current directory as `[STATE_NAME]_[YEAR].csv`
 * install dependencies specified in `requirements3.txt`
 
 ### Running
-`python generate_census_data_per_state_by_year.py` - generates CSVs for 50 states based on 2021 data
+`python generate_census_data_per_state_by_year.py` - generates CSVs for 50 states based on 2020 data
 
 `python generate_census_data_per_state_by_year.py [year]` - generates CSVs for 50 states based on data for the specified year

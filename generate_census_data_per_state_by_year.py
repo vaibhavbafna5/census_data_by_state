@@ -6,7 +6,7 @@ import requests
 import sys
 
 # TODO: remove hardcoded global
-YEAR = 2021
+YEAR = 2020
 
 def generate_survey_codes_for_each_state():
     """
