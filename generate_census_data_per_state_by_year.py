@@ -56,7 +56,7 @@ def get_data_by_group_and_state(survey_code, state_fips):
             
     return variables_to_values
 
-### MAIN 
+### ----- MAIN -----
 
 # attempt to read year, not a great check - should improve this
 if len(sys.argv) > 1:

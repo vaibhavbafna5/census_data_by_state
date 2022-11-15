@@ -8,7 +8,7 @@ CSV files are saved in the current directory as `[STATE_NAME]_[YEAR].csv`
 Also have attached a Jupyter Notebook to show samples of function output.
 ### Setup
 * initialize virtual environment
-* install dependencies specified in `requirements3.txt` (note: requirements are for Jupyter environment, don't necessarily need all of them)
+* install dependencies specified in `requirements3.txt`
 
 ### Running
 `python generate_census_data_by_state.py` - generates CSVs for 50 states based on 2021 data
