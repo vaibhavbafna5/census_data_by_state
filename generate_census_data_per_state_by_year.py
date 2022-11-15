@@ -10,7 +10,6 @@ YEAR = 2021
 
 def generate_survey_codes_for_each_state():
     """
-    A true beast of a function. 
     Takes more LOC than hardcoding the survey codes. 
     """
     codes = []
