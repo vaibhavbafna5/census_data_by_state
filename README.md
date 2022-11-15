@@ -7,7 +7,7 @@ Spec can be found [here](https://docs.google.com/document/d/16SBPGHY_kbDQLDR4tlT
 CSV files are saved in the current directory as `[STATE_NAME]_[YEAR].csv`
 Also have attached a Jupyter Notebook to show samples of function output.
 ### Setup
-* initialize virtual environment
+* initialize virtual environment for python > 3.7
 * install dependencies specified in `requirements3.txt`
 
 ### Running
